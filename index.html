@@ -120,13 +120,6 @@
       position:relative;
     }
     .avatar img{ width:100%; height:100%; object-fit:cover; display:block; }
-    .avatar .ph{
-      text-align:center; padding: 12px; color: var(--muted);
-      font-size: 12px;
-    }
-    .avatar .ph strong{
-      display:block; color: var(--text); font-size: 13px; margin-bottom: 6px; letter-spacing:.2px;
-    }
 
     h1{ margin:0; font-size: 28px; letter-spacing:.2px; }
     .subtitle{ margin: 6px 0 10px; color: var(--muted); font-size: 14px; }
@@ -184,16 +177,23 @@
     .note.ok{ background: var(--ok); }
     .note.warn{ background: var(--warn); }
 
-    .links{ display:flex; gap: 10px; flex-wrap:wrap; margin-top:10px; }
-    .link{
-      display:inline-flex; align-items:center; gap:8px;
+    /* Social icon links */
+    .socialRow{ display:flex; gap:10px; flex-wrap:wrap; margin-top: 12px; }
+    .socialLink{
+      display:inline-flex; align-items:center; gap:10px;
       padding: 9px 10px;
       border-radius: 12px;
       border: 1px solid var(--border);
       background: rgba(255,255,255,0.02);
       font-size: 13px;
     }
-    .link:hover{ text-decoration:none; border-color: rgba(231,238,252,.22); background: rgba(255,255,255,0.05); }
+    .socialLink:hover{ text-decoration:none; border-color: rgba(231,238,252,.22); background: rgba(255,255,255,0.05); }
+    .icon{
+      width:18px; height:18px; display:inline-block;
+      color: var(--text);
+      opacity: .92;
+      flex: 0 0 auto;
+    }
 
     .mono{ font-family: var(--mono); }
 
@@ -216,7 +216,6 @@
       .grid{ grid-template-columns: 1fr; }
       .actions{ justify-content:flex-start; }
     }
-
     @media print{
       .btn{ display:none !important; }
       body{ background:#fff; }
@@ -231,12 +230,12 @@
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
 
-  <!-- Babel for JSX in the browser (fine for a personal static site) -->
+  <!-- Babel for JSX in the browser -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
   <script type="text/babel">
     /*****************************************************************
-     * EDIT CONTENT HERE ONLY: CONFIG + ARRAYS
+     * EDIT CONTENT HERE ONLY
      *****************************************************************/
     const CONFIG = {
       site: {
@@ -248,24 +247,23 @@
         headline: "Principal Software Engineer • Solutions Architect",
         careerStartYear: 2012,
         photoPath: "assets/profile.jpg",
-
         tagline:
           "Primarily focused on .NET/C# and Microsoft Azure — building scalable, cloud-native platforms with strong reliability and operability.",
-
         personalLine: "Dad • Endurance runner",
-
-        // Only keep GitHub + LinkedIn (no email)
-        links: [
-          { label: "GitHub", href: "https://github.com/svaza", icon: "🐙", show: true },
-          { label: "LinkedIn", href: "https://www.linkedin.com/in/REPLACE_ME", icon: "💼", show: true },
-        ],
-
         highlights: [
           "Cloud & Platform Architecture",
           "Distributed Systems",
           "Microservices & DDD",
           "Event-Driven Architecture",
           "Performance & Reliability",
+        ],
+
+        // Social profiles only (no email). Replace placeholders.
+        socialProfiles: [
+          { key: "github", label: "GitHub", href: "https://github.com/svaza" },
+          { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/REPLACE_ME" },
+          { key: "strava", label: "Strava", href: "https://www.strava.com/athletes/REPLACE_ME" },
+          { key: "garmin", label: "Garmin", href: "https://connect.garmin.com/modern/profile/REPLACE_ME" },
         ],
       },
 
@@ -279,7 +277,6 @@
         ],
       },
 
-      // Kept: Core strengths + Technical toolkit
       coreStrengths: [
         {
           tone: "ok",
@@ -302,36 +299,43 @@
       ],
 
       skillGroups: [
-        {
-          title: "Core stack",
-          chips: [".NET", "ASP.NET Core", "C#", "EF Core", "Dapper", "xUnit", "Serilog"],
-        },
-        {
-          title: "Cloud",
-          chips: ["Microsoft Azure", "App Service", "Functions", "Service Bus", "App Insights", "Key Vault", "App Config", "Azure SQL"],
-        },
-        {
-          title: "Data & Messaging",
-          chips: ["SQL Server", "PostgreSQL", "Oracle", "Redis", "RabbitMQ", "Kafka", "Elasticsearch"],
-        },
-        {
-          title: "Architecture",
-          chips: ["REST APIs", "Clean Architecture", "DDD", "Event-Driven", "Microservices", "Observability"],
-        },
-        {
-          title: "Front-end (when needed)",
-          chips: ["React", "Angular", "Bootstrap"],
-        },
-        {
-          title: "AI (practical)",
-          chips: ["Prompt Engineering", "Copilot-assisted workflows"],
-        },
+        { title: "Core stack", chips: [".NET", "ASP.NET Core", "C#", "EF Core", "Dapper", "xUnit", "Serilog"] },
+        { title: "Cloud", chips: ["Microsoft Azure", "App Service", "Functions", "Service Bus", "App Insights", "Key Vault", "App Config", "Azure SQL"] },
+        { title: "Data & Messaging", chips: ["SQL Server", "PostgreSQL", "Oracle", "Redis", "RabbitMQ", "Kafka", "Elasticsearch"] },
+        { title: "Architecture", chips: ["REST APIs", "Clean Architecture", "DDD", "Event-Driven", "Microservices", "Observability"] },
+        { title: "Front-end (when needed)", chips: ["React", "Angular", "Bootstrap"] },
+        { title: "AI (practical)", chips: ["Prompt Engineering", "Copilot-assisted workflows"] },
       ],
+    };
 
-      contact: {
-        title: "Contact",
-        note: "Best way to reach me: LinkedIn or GitHub.",
-      },
+    /*****************************************************************
+     * ICONS (inline SVGs, no external icon libs)
+     *****************************************************************/
+    const Icons = {
+      github: (props) => (
+        <svg className="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+          <path d="M12 .5C5.73.5.75 5.62.75 12.03c0 5.1 3.29 9.42 7.86 10.95.58.11.79-.26.79-.56v-2.1c-3.2.71-3.88-1.58-3.88-1.58-.53-1.37-1.28-1.74-1.28-1.74-1.05-.73.08-.72.08-.72 1.16.08 1.78 1.24 1.78 1.24 1.03 1.82 2.71 1.3 3.37.99.1-.76.4-1.3.73-1.6-2.55-.3-5.23-1.32-5.23-5.88 0-1.3.45-2.35 1.2-3.18-.12-.3-.52-1.54.11-3.2 0 0 .98-.32 3.2 1.22a10.7 10.7 0 0 1 2.91-.4c.99 0 1.99.14 2.92.4 2.22-1.54 3.2-1.22 3.2-1.22.63 1.66.23 2.9.11 3.2.74.83 1.2 1.88 1.2 3.18 0 4.57-2.69 5.57-5.25 5.87.41.37.78 1.1.78 2.22v3.3c0 .31.2.68.8.56 4.56-1.53 7.85-5.85 7.85-10.95C23.25 5.62 18.27.5 12 .5z"/>
+        </svg>
+      ),
+      linkedin: (props) => (
+        <svg className="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+          <path d="M4.98 3.5C3.88 3.5 3 4.4 3 5.5s.88 2 1.98 2h.02C6.1 7.5 7 6.6 7 5.5S6.1 3.5 5 3.5h-.02zM3.5 21h3V9h-3v12zM9 9h2.9v1.64h.04c.4-.76 1.38-1.56 2.84-1.56 3.04 0 3.6 2.03 3.6 4.67V21h-3v-6.07c0-1.45-.03-3.31-2.02-3.31-2.02 0-2.33 1.58-2.33 3.2V21H9V9z"/>
+        </svg>
+      ),
+      strava: (props) => (
+        <svg className="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+          <!-- Simplified Strava mark -->
+          <path d="M10.02 2 4.7 12.27h3.14l2.18-4.07 2.2 4.07h3.14L10.02 2z"/>
+          <path d="M14.9 12.27 12.7 16.34 10.5 12.27H8.05l4.65 9.73 4.65-9.73H14.9z"/>
+        </svg>
+      ),
+      garmin: (props) => (
+        <svg className="icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>
+          <!-- Minimal "G" + triangle accent (not official logo, just a clean generic icon) -->
+          <path d="M12 3.2a8.8 8.8 0 1 0 0 17.6c2.44 0 4.67-1 6.3-2.6l-2.04-2.04A5.9 5.9 0 1 1 12 6.1c1.63 0 3.11.66 4.18 1.73H12v3h7.7A8.77 8.77 0 0 0 12 3.2z"/>
+          <path d="M18.9 5.2l2.1.6-1.5 1.6-1.2-2.2z"/>
+        </svg>
+      ),
     };
 
     /*****************************************************************
@@ -353,16 +357,6 @@
       );
     }
 
-    function LinkPill({ href, icon, label }) {
-      const isHttp = href.startsWith("http");
-      return (
-        <a className="link" href={href} target={isHttp ? "_blank" : undefined} rel={isHttp ? "noreferrer" : undefined}>
-          <span aria-hidden="true">{icon}</span>
-          <span>{label}</span>
-        </a>
-      );
-    }
-
     function Chips({ items }) {
       return (
         <ul className="chips" aria-label="Highlights">
@@ -373,9 +367,9 @@
       );
     }
 
-    function SectionCard({ title, children, id }) {
+    function SectionCard({ title, children }) {
       return (
-        <section className="card" id={id}>
+        <section className="card">
           <h2>{title}</h2>
           {children}
         </section>
@@ -399,12 +393,25 @@
       );
     }
 
-    function App() {
-      const startYear = CONFIG.profile.careerStartYear;
-      const expYears = useMemo(() => yearsOfExperience(startYear), [startYear]);
+    function SocialProfiles({ profiles }) {
+      return (
+        <div className="socialRow" aria-label="Social profiles">
+          {profiles.map((p) => {
+            const Icon = Icons[p.key] || null;
+            return (
+              <a key={p.key} className="socialLink" href={p.href} target="_blank" rel="noreferrer">
+                {Icon ? <Icon /> : <span className="icon" />}
+                <span>{p.label}</span>
+              </a>
+            );
+          })}
+        </div>
+      );
+    }
 
+    function App() {
+      const expYears = useMemo(() => yearsOfExperience(CONFIG.profile.careerStartYear), []);
       const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
-      const [photoUrl, setPhotoUrl] = useState(CONFIG.profile.photoPath);
       const [photoOk, setPhotoOk] = useState(true);
 
       useEffect(() => {
@@ -412,16 +419,6 @@
         localStorage.setItem("theme", theme);
         document.title = CONFIG.site.pageTitle;
       }, [theme]);
-
-      const visibleLinks = CONFIG.profile.links.filter(l => l.show);
-
-      const onPhotoUpload = (e) => {
-        const file = e.target.files && e.target.files[0];
-        if (!file) return;
-        const url = URL.createObjectURL(file);
-        setPhotoUrl(url);
-        setPhotoOk(true);
-      };
 
       return (
         <div className="wrap" id="top">
@@ -442,47 +439,24 @@
                 <span aria-hidden="true">🌓</span>
                 <span>Theme</span>
               </Button>
-
-              <a className="btn" href="#contact" title="Jump to contact">
-                <span aria-hidden="true">🔗</span>
-                <span>Contact</span>
-              </a>
             </div>
           </div>
 
           <section className="hero" aria-label="Profile header">
             <div>
               <div className="avatar" aria-label="Profile photo">
-                {photoOk ? (
-                  <img
-                    src={photoUrl}
-                    alt={`${CONFIG.profile.name} profile`}
-                    onError={() => setPhotoOk(false)}
-                  />
-                ) : (
-                  <div className="ph">
-                    <strong>Profile Photo</strong>
-                    <div>Put <span className="mono">assets/profile.jpg</span> or upload below</div>
-                  </div>
-                )}
-              </div>
-
-              <div style={{ marginTop: 10, color: "var(--muted)", fontSize: 12 }}>
-                <div style={{ marginBottom: 6 }}>Upload a local photo (preview only):</div>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={onPhotoUpload}
-                  style={{
-                    border: "1px dashed var(--border)",
-                    background: "rgba(255,255,255,0.02)",
-                    borderRadius: 12,
-                    padding: 10,
-                    color: "var(--muted)",
-                    width: "100%",
-                    maxWidth: 320,
-                  }}
+                <img
+                  src={CONFIG.profile.photoPath}
+                  alt={`${CONFIG.profile.name} profile`}
+                  onError={() => setPhotoOk(false)}
+                  style={{ display: photoOk ? "block" : "none" }}
                 />
+                {!photoOk ? (
+                  <div style={{ padding: 12, textAlign: "center", color: "var(--muted)", fontSize: 12 }}>
+                    <div style={{ color: "var(--text)", fontWeight: 700, marginBottom: 6 }}>Profile Photo</div>
+                    <div>Put <span className="mono">assets/profile.jpg</span></div>
+                  </div>
+                ) : null}
               </div>
             </div>
 
@@ -501,11 +475,8 @@
                 <div className="pill"><b>Life</b> {CONFIG.profile.personalLine}</div>
               </div>
 
-              <div className="links" style={{ marginTop: 12 }}>
-                {visibleLinks.map((l) => (
-                  <LinkPill key={l.label} href={l.href} icon={l.icon} label={l.label} />
-                ))}
-              </div>
+              {/* Social profiles live here (no separate contact panel) */}
+              <SocialProfiles profiles={CONFIG.profile.socialProfiles} />
             </div>
           </section>
 
@@ -534,20 +505,6 @@
               <SkillGroups groups={CONFIG.skillGroups} />
             </SectionCard>
           </div>
-
-          <SectionCard title={CONFIG.contact.title} id="contact">
-            <p style={{ color: "var(--muted)", marginTop: 0 }}>{CONFIG.contact.note}</p>
-            <div className="links">
-              {visibleLinks.map((l) => (
-                <LinkPill
-                  key={"contact-" + l.label}
-                  href={l.href}
-                  icon={l.icon}
-                  label={l.href}
-                />
-              ))}
-            </div>
-          </SectionCard>
 
           <footer className="foot" aria-label="Footer">
             <div>© {new Date().getFullYear()} {CONFIG.profile.name}</div>
