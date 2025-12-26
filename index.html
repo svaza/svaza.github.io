@@ -1,5 +1,737 @@
-<html>
-    <body>
-        Hello World
-    </body>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Santosh Vaza — Principal Software Engineer / Solutions Architect (C#, .NET, Azure). 13+ years building scalable, reliable backend systems and cloud architectures." />
+  <meta name="theme-color" content="#0b1220" />
+  <title>Santosh Vaza | Principal Engineer • Solutions Architect</title>
+
+  <style>
+    :root{
+      --bg: #0b1220;
+      --panel: #111a2e;
+      --panel2: #0f172a;
+      --text: #e7eefc;
+      --muted: rgba(231,238,252,.75);
+      --muted2: rgba(231,238,252,.6);
+      --border: rgba(231,238,252,.14);
+      --shadow: 0 18px 45px rgba(0,0,0,.35);
+      --accent: #62a9ff;
+      --accent2: #7cffc1;
+      --chip: rgba(98,169,255,.12);
+      --chipBorder: rgba(98,169,255,.22);
+      --ok: rgba(124,255,193,.15);
+      --warn: rgba(255,216,106,.14);
+      --danger: rgba(255,108,108,.14);
+      --radius: 18px;
+      --radius2: 14px;
+      --max: 1080px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    /* Light theme overrides */
+    [data-theme="light"]{
+      --bg: #f6f8ff;
+      --panel: #ffffff;
+      --panel2: #ffffff;
+      --text: #0b1220;
+      --muted: rgba(11,18,32,.72);
+      --muted2: rgba(11,18,32,.58);
+      --border: rgba(11,18,32,.14);
+      --shadow: 0 16px 40px rgba(11,18,32,.10);
+      --accent: #1b6cff;
+      --accent2: #00a884;
+      --chip: rgba(27,108,255,.08);
+      --chipBorder: rgba(27,108,255,.16);
+      --ok: rgba(0,168,132,.12);
+      --warn: rgba(245,158,11,.12);
+      --danger: rgba(239,68,68,.10);
+    }
+
+    *{ box-sizing: border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: var(--sans);
+      background: radial-gradient(1200px 700px at 10% 10%, rgba(98,169,255,.18), transparent 60%),
+                  radial-gradient(900px 600px at 80% 20%, rgba(124,255,193,.12), transparent 55%),
+                  radial-gradient(900px 700px at 40% 90%, rgba(98,169,255,.10), transparent 60%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.55;
+    }
+
+    a{ color: inherit; text-decoration: none; }
+    a:hover{ text-decoration: underline; }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    .topbar{
+      display:flex;
+      justify-content: space-between;
+      align-items:center;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap: 10px;
+      min-width: 260px;
+    }
+
+    .dot{
+      width: 10px; height: 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      box-shadow: 0 0 0 6px rgba(98,169,255,.10);
+    }
+
+    .brand strong{ letter-spacing:.2px; }
+    .brand small{
+      display:block;
+      color: var(--muted2);
+      font-family: var(--mono);
+      font-size: 12px;
+      margin-top: 1px;
+    }
+
+    .actions{
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.03);
+      box-shadow: none;
+      cursor: pointer;
+      user-select: none;
+      transition: transform .08s ease, background .15s ease, border-color .15s ease;
+      font-size: 13px;
+      color: var(--text);
+    }
+    .btn:hover{ background: rgba(255,255,255,0.06); border-color: rgba(231,238,252,.22); text-decoration: none; }
+    .btn:active{ transform: translateY(1px); }
+
+    .hero{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      display:grid;
+      grid-template-columns: 160px 1fr;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .avatar{
+      width: 140px;
+      height: 140px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background:
+        radial-gradient(120px 120px at 30% 30%, rgba(98,169,255,.18), transparent 55%),
+        radial-gradient(120px 120px at 70% 60%, rgba(124,255,193,.12), transparent 55%),
+        rgba(255,255,255,0.02);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      overflow:hidden;
+      position: relative;
+    }
+
+    .avatar img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:none;
+    }
+
+    .avatar .placeholder{
+      text-align:center;
+      padding: 12px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .avatar .placeholder strong{
+      display:block;
+      color: var(--text);
+      font-size: 13px;
+      margin-bottom: 6px;
+      letter-spacing: .2px;
+    }
+
+    .hero h1{
+      margin:0;
+      font-size: 28px;
+      letter-spacing: .2px;
+    }
+
+    .subtitle{
+      margin: 6px 0 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .bullets{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 10px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .chip{
+      border: 1px solid var(--chipBorder);
+      background: var(--chip);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.03);
+      border-radius: var(--radius2);
+      padding: 16px;
+      box-shadow: none;
+    }
+
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 14px;
+      letter-spacing: .2px;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .card p{ margin: 0 0 10px; color: var(--text); }
+    .card p:last-child{ margin-bottom:0; }
+
+    .kpi{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+    .kpi .pill{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 999px;
+      padding: 8px 10px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .kpi .pill b{
+      color: var(--text);
+      font-family: var(--mono);
+      font-weight: 700;
+      margin-right: 6px;
+    }
+
+    .twoCol{
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .list{
+      margin: 8px 0 0;
+      padding-left: 18px;
+      color: var(--muted);
+    }
+    .list li{ margin: 6px 0; }
+
+    .timeline{
+      margin: 8px 0 0;
+      padding: 0;
+      list-style: none;
+      display:flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .titem{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 12px;
+      padding: 12px;
+    }
+    .titem .row{
+      display:flex;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: baseline;
+    }
+    .titem .role{
+      font-weight: 700;
+      letter-spacing: .2px;
+    }
+    .titem .time{
+      font-family: var(--mono);
+      color: var(--muted2);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .titem .desc{
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .links{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .link{
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      padding: 9px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      font-size: 13px;
+      color: var(--text);
+    }
+    .link:hover{ text-decoration: none; border-color: rgba(231,238,252,.22); background: rgba(255,255,255,0.05); }
+
+    .foot{
+      margin-top: 18px;
+      color: var(--muted2);
+      font-size: 12px;
+      display:flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items:center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .note{
+      display:inline-flex;
+      gap: 8px;
+      align-items:flex-start;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .note b{ color: var(--text); }
+    .note.ok{ background: var(--ok); }
+    .note.warn{ background: var(--warn); }
+    .note.danger{ background: var(--danger); }
+
+    .inline{
+      display:flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .file{
+      display:flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    input[type="file"]{
+      border: 1px dashed var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 12px;
+      padding: 10px;
+      color: var(--muted);
+      width: 100%;
+      max-width: 320px;
+    }
+
+    .mono{ font-family: var(--mono); }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .hero{ grid-template-columns: 1fr; }
+      .avatar{ width: 120px; height: 120px; }
+      .grid{ grid-template-columns: 1fr; }
+      .twoCol{ grid-template-columns: 1fr; }
+      .actions{ justify-content: flex-start; }
+    }
+
+    /* Print */
+    @media print{
+      body{ background: #fff; }
+      .btn, .file { display:none !important; }
+      .hero, .card, .titem, .link, .note { box-shadow: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap" id="top">
+    <div class="topbar">
+      <div class="brand">
+        <span class="dot" aria-hidden="true"></span>
+        <div>
+          <strong>Santosh Vaza</strong>
+          <small class="mono">svaza.github.io</small>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" id="themeBtn" type="button" title="Toggle theme">
+          <span aria-hidden="true">🌓</span>
+          <span>Theme</span>
+        </button>
+        <a class="btn" href="#contact" title="Jump to contact links">
+          <span aria-hidden="true">🔗</span>
+          <span>Contact</span>
+        </a>
+        <button class="btn" id="copyBtn" type="button" title="Copy intro snippet">
+          <span aria-hidden="true">📋</span>
+          <span>Copy Intro</span>
+        </button>
+      </div>
+    </div>
+
+    <section class="hero" aria-label="Profile header">
+      <div>
+        <div class="avatar" role="img" aria-label="Profile photo">
+          <!-- Option A (recommended): put a file at /assets/profile.jpg and it will auto-load -->
+          <img id="profileImg" alt="Santosh profile photo" />
+          <div class="placeholder" id="avatarPlaceholder">
+            <strong>Profile Photo</strong>
+            <div>Drop <span class="mono">assets/profile.jpg</span><br/>or use the uploader below</div>
+          </div>
+        </div>
+
+        <div class="file" aria-label="Profile photo uploader">
+          <label for="photoInput">Upload a local photo (preview only):</label>
+          <input id="photoInput" type="file" accept="image/*" />
+        </div>
+      </div>
+
+      <div>
+        <h1>Principal Software Engineer • Solutions Architect</h1>
+        <div class="subtitle">
+          13+ years building backend platforms and cloud architectures with <b>.NET / C#</b> and <b>Microsoft Azure</b>.
+          I focus on pragmatic, secure, observable systems that ship and scale.
+        </div>
+
+        <ul class="bullets" aria-label="Highlights">
+          <li class="chip">Cloud &amp; Platform Architecture</li>
+          <li class="chip">Distributed Systems</li>
+          <li class="chip">Microservices &amp; DDD</li>
+          <li class="chip">Event-Driven Architecture</li>
+          <li class="chip">Performance &amp; Reliability</li>
+          <li class="chip">Engineering Leadership</li>
+        </ul>
+
+        <div class="kpi" aria-label="Quick facts">
+          <div class="pill"><b>13+</b> years experience</div>
+          <div class="pill"><b>.NET</b> backend specialist</div>
+          <div class="pill"><b>Azure</b> architecture &amp; operations</div>
+          <div class="pill"><b>Dad</b> + endurance runner</div>
+        </div>
+
+        <div class="inline" aria-label="Primary links">
+          <!-- Replace these with your real links -->
+          <a class="link" href="https://github.com/svaza" target="_blank" rel="noreferrer">
+            <span aria-hidden="true">🐙</span><span>GitHub</span>
+          </a>
+          <a class="link" href="https://www.linkedin.com/in/REPLACE_ME" target="_blank" rel="noreferrer">
+            <span aria-hidden="true">💼</span><span>LinkedIn (update)</span>
+          </a>
+          <a class="link" href="mailto:REPLACE_ME@example.com">
+            <span aria-hidden="true">✉️</span><span>Email (update)</span>
+          </a>
+          <a class="link" href="assets/SantoshVaza-Resume.pdf" target="_blank" rel="noreferrer">
+            <span aria-hidden="true">📄</span><span>Resume (optional)</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div class="grid" aria-label="Summary grid">
+      <section class="card">
+        <h2>About</h2>
+        <p>
+          I’m a <b>Principal Engineer / Solutions Architect</b> with 13+ years of experience designing and delivering
+          production systems end-to-end—requirements, architecture, implementation, CI/CD, observability, and operations.
+        </p>
+        <p>
+          I like systems that are <b>boring in production</b>: clear boundaries, predictable failure modes, measurable SLIs/SLOs,
+          and security controls that don’t become a “later” problem.
+        </p>
+      </section>
+
+      <section class="card">
+        <h2>Currently focusing</h2>
+        <ul class="list">
+          <li>Azure architecture patterns, governance (Policy/RBAC), and cost-aware designs</li>
+          <li>LLM integration for business apps (RAG, tool-calling patterns, evaluation &amp; guardrails)</li>
+          <li>Performance tuning, concurrency, and operational excellence</li>
+          <li>Clear communication: writing docs, diagrams, and decision records</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="twoCol" aria-label="Skills and experience">
+      <section class="card">
+        <h2>Core strengths</h2>
+
+        <div class="note ok">
+          <div aria-hidden="true">✅</div>
+          <div>
+            <b>Architecture with trade-offs:</b> I prioritize simple designs that satisfy constraints (latency, scale, security, cost)
+            and evolve cleanly as requirements change.
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="note warn">
+          <div aria-hidden="true">⚖️</div>
+          <div>
+            <b>Pragmatic engineering:</b> I’m opinionated about correctness and reliability, but not dogmatic about patterns.
+            If a pattern adds complexity, it must earn its keep.
+          </div>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="note">
+          <div aria-hidden="true">📈</div>
+          <div>
+            <b>Shipping mindset:</b> I favor incremental delivery, measurable outcomes, and strong feedback loops
+            (telemetry, dashboards, postmortems).
+          </div>
+        </div>
+
+        <h2 style="margin-top:14px;">Technical stack (typical)</h2>
+        <ul class="bullets" style="margin-top:10px;">
+          <li class="chip">C# • .NET</li>
+          <li class="chip">REST APIs • Async</li>
+          <li class="chip">EF Core • SQL</li>
+          <li class="chip">Caching</li>
+          <li class="chip">Azure App Services</li>
+          <li class="chip">Azure Functions</li>
+          <li class="chip">AKS (when needed)</li>
+          <li class="chip">Service Bus / Messaging</li>
+          <li class="chip">Key Vault</li>
+          <li class="chip">App Config</li>
+          <li class="chip">APIM</li>
+          <li class="chip">Monitoring &amp; Alerting</li>
+        </ul>
+
+        <h2 style="margin-top:14px;">Architecture toolkit</h2>
+        <ul class="list">
+          <li><b>Microservices</b> when boundaries and independent scaling actually justify it</li>
+          <li><b>DDD / Clean Architecture</b> for complex domains and maintainability</li>
+          <li><b>Event-driven</b> patterns (outbox, idempotency, retries, DLQs) for resilience</li>
+          <li><b>Security</b>: least privilege, secrets hygiene, defense-in-depth</li>
+          <li><b>Observability</b>: structured logs, traces, metrics, SLOs</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Experience snapshot</h2>
+        <ul class="timeline" aria-label="Timeline">
+          <li class="titem">
+            <div class="row">
+              <div class="role">Principal Engineer / Solutions Architect</div>
+              <div class="time">Recent</div>
+            </div>
+            <div class="desc">
+              Leading architecture and delivery for cloud-native backend platforms, aligning stakeholders, reviewing designs,
+              setting engineering standards, and guiding teams through implementation and operations.
+              <br/><span class="mono">Company names omitted intentionally.</span>
+            </div>
+          </li>
+
+          <li class="titem">
+            <div class="row">
+              <div class="role">Senior Software Engineer</div>
+              <div class="time">2016–2021</div>
+            </div>
+            <div class="desc">
+              Built and scaled APIs and distributed services, improved reliability, introduced better observability and CI/CD,
+              and mentored engineers on clean architecture and performance practices.
+            </div>
+          </li>
+
+          <li class="titem">
+            <div class="row">
+              <div class="role">Software Engineer</div>
+              <div class="time">2012–2016</div>
+            </div>
+            <div class="desc">
+              Full-stack/backend engineering foundation—shipping business features, collaborating with product, and learning how
+              systems fail in the real world.
+            </div>
+          </li>
+        </ul>
+
+        <h2 style="margin-top:14px;">Projects (add yours)</h2>
+        <ul class="list">
+          <li><b>Project A:</b> One-line outcome + tech (e.g., “Reduced API latency by 40% with caching + indexing.”)</li>
+          <li><b>Project B:</b> One-line outcome + tech (e.g., “Built event-driven workflow with idempotency + outbox.”)</li>
+          <li><b>Project C:</b> One-line outcome + tech (e.g., “Implemented multi-tenant authZ with RBAC + policies.”)</li>
+        </ul>
+      </section>
+    </div>
+
+    <div class="grid" aria-label="Personal and writing">
+      <section class="card">
+        <h2>How I work</h2>
+        <ul class="list">
+          <li>I write <b>decision records</b> so future-me (and others) understand why we chose a path.</li>
+          <li>I prefer <b>explicit boundaries</b> (APIs, contracts, ownership) to reduce coordination overhead.</li>
+          <li>I optimize for <b>long-term maintainability</b>, not just “it works today.”</li>
+          <li>I treat <b>operability</b> (alerts, dashboards, runbooks) as part of the deliverable.</li>
+        </ul>
+      </section>
+
+      <section class="card" id="contact">
+        <h2>Contact</h2>
+        <p style="color: var(--muted); margin-top: 0;">
+          Best way to reach me: LinkedIn or email. Replace placeholders below.
+        </p>
+        <div class="links">
+          <a class="link" href="https://github.com/svaza" target="_blank" rel="noreferrer">
+            <span aria-hidden="true">🐙</span><span>github.com/svaza</span>
+          </a>
+          <a class="link" href="https://www.linkedin.com/in/REPLACE_ME" target="_blank" rel="noreferrer">
+            <span aria-hidden="true">💼</span><span>linkedin.com/in/REPLACE_ME</span>
+          </a>
+          <a class="link" href="mailto:REPLACE_ME@example.com">
+            <span aria-hidden="true">✉️</span><span>REPLACE_ME@example.com</span>
+          </a>
+        </div>
+
+        <div style="height:10px"></div>
+
+        <div class="note">
+          <div aria-hidden="true">👨‍👩‍👧</div>
+          <div>
+            <b>Outside work:</b> I’m a dad, enjoy endurance running, and like learning how things work—especially cloud systems and architecture.
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="foot" aria-label="Footer">
+      <div>© <span id="year"></span> Santosh Vaza</div>
+      <div class="mono">Built for GitHub Pages • <a href="#top">Back to top</a></div>
+    </footer>
+  </div>
+
+  <script>
+    (function () {
+      const root = document.documentElement;
+
+      // ---- Theme toggle (persist in localStorage)
+      const themeBtn = document.getElementById("themeBtn");
+      const savedTheme = localStorage.getItem("theme");
+      if (savedTheme === "light" || savedTheme === "dark") {
+        root.setAttribute("data-theme", savedTheme);
+      }
+
+      themeBtn.addEventListener("click", () => {
+        const current = root.getAttribute("data-theme") || "dark";
+        const next = current === "dark" ? "light" : "dark";
+        root.setAttribute("data-theme", next);
+        localStorage.setItem("theme", next);
+      });
+
+      // ---- Year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // ---- Profile image auto-load (assets/profile.jpg)
+      const img = document.getElementById("profileImg");
+      const placeholder = document.getElementById("avatarPlaceholder");
+
+      // Try to load a default file if you add it to repo.
+      const defaultPath = "assets/profile.jpg";
+      img.src = defaultPath;
+
+      img.onload = () => {
+        img.style.display = "block";
+        placeholder.style.display = "none";
+      };
+      img.onerror = () => {
+        // Keep placeholder visible if file doesn't exist.
+        img.style.display = "none";
+        placeholder.style.display = "block";
+      };
+
+      // ---- Local upload preview (does not upload anywhere)
+      const input = document.getElementById("photoInput");
+      input.addEventListener("change", () => {
+        const file = input.files && input.files[0];
+        if (!file) return;
+
+        const url = URL.createObjectURL(file);
+        img.src = url;
+        img.style.display = "block";
+        placeholder.style.display = "none";
+      });
+
+      // ---- Copy intro snippet
+      const copyBtn = document.getElementById("copyBtn");
+      copyBtn.addEventListener("click", async () => {
+        const text =
+`Santosh Vaza — Principal Software Engineer / Solutions Architect
+13+ years building backend platforms and cloud architectures with .NET/C# and Microsoft Azure.
+Focus: pragmatic systems design, reliability, observability, and shipping outcomes.`;
+
+        try {
+          await navigator.clipboard.writeText(text);
+          copyBtn.innerHTML = '<span aria-hidden="true">✅</span><span>Copied</span>';
+          setTimeout(() => {
+            copyBtn.innerHTML = '<span aria-hidden="true">📋</span><span>Copy Intro</span>';
+          }, 1200);
+        } catch {
+          alert("Copy failed. You can manually select and copy the text from the page.");
+        }
+      });
+    })();
+  </script>
+</body>
 </html>
