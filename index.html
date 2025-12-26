@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Santosh Vaza | Principal Engineer • Solutions Architect</title>
-  <meta name="description" content="Santosh Vaza — Principal Software Engineer & Solutions Architect specializing in .NET/C# and Microsoft Azure. 13+ years building scalable cloud-native platforms." />
+  <meta name="description" content="Santosh Vaza — Principal Software Engineer & Solutions Architect specializing in .NET/C# and Microsoft Azure. 13+ years building scalable cloud-native systems." />
   <meta name="theme-color" content="#0b1220" />
 
   <style>
@@ -24,7 +24,6 @@
       --chipBorder: rgba(98,169,255,.22);
       --ok: rgba(124,255,193,.14);
       --warn: rgba(255,216,106,.12);
-      --danger: rgba(255,108,108,.10);
       --radius: 18px;
       --radius2: 14px;
       --max: 1080px;
@@ -46,7 +45,6 @@
       --chipBorder: rgba(27,108,255,.16);
       --ok: rgba(0,168,132,.12);
       --warn: rgba(245,158,11,.12);
-      --danger: rgba(239,68,68,.10);
     }
 
     *{ box-sizing:border-box; }
@@ -154,9 +152,6 @@
     }
     .pill b{ color: var(--text); font-family: var(--mono); font-weight: 700; margin-right: 6px; }
 
-    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top:14px; }
-    .twoCol{ display:grid; grid-template-columns: 1.2fr .8fr; gap: 14px; margin-top:14px; }
-
     .card{
       border: 1px solid var(--border);
       background: var(--panel2);
@@ -172,8 +167,9 @@
     }
     .card p{ margin: 0 0 10px; }
     .card p:last-child{ margin-bottom: 0; }
-    .list{ margin: 8px 0 0; padding-left: 18px; color: var(--muted); }
-    .list li{ margin: 6px 0; }
+
+    .grid{ display:grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top:14px; }
+    .one{ display:grid; grid-template-columns: 1fr; gap: 14px; margin-top:14px; }
 
     .note{
       display:flex; gap:10px; align-items:flex-start;
@@ -187,21 +183,6 @@
     .note b{ color: var(--text); }
     .note.ok{ background: var(--ok); }
     .note.warn{ background: var(--warn); }
-    .note.danger{ background: var(--danger); }
-
-    .timeline{ margin: 8px 0 0; padding: 0; list-style:none; display:flex; flex-direction:column; gap: 10px; }
-    .titem{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,0.02);
-      border-radius: 12px;
-      padding: 12px;
-    }
-    .row{ display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; align-items:baseline; }
-    .role{ font-weight:700; letter-spacing:.2px; }
-    .time{ font-family: var(--mono); color: var(--muted2); font-size: 12px; white-space: nowrap; }
-    .desc{ margin-top: 6px; color: var(--muted); font-size: 13px; }
-    .desc ul{ margin: 8px 0 0; padding-left: 18px; }
-    .desc li{ margin: 6px 0; }
 
     .links{ display:flex; gap: 10px; flex-wrap:wrap; margin-top:10px; }
     .link{
@@ -233,7 +214,6 @@
       .hero{ grid-template-columns: 1fr; }
       .avatar{ width:120px; height:120px; }
       .grid{ grid-template-columns: 1fr; }
-      .twoCol{ grid-template-columns: 1fr; }
       .actions{ justify-content:flex-start; }
     }
 
@@ -256,7 +236,7 @@
 
   <script type="text/babel">
     /*****************************************************************
-     * EDIT CONTENT HERE (one place): CONFIG + ARRAYS
+     * EDIT CONTENT HERE ONLY: CONFIG + ARRAYS
      *****************************************************************/
     const CONFIG = {
       site: {
@@ -266,66 +246,69 @@
       profile: {
         name: "Santosh Vaza",
         headline: "Principal Software Engineer • Solutions Architect",
-        // You told me to treat your start as 2012; this drives the "years+" label automatically.
         careerStartYear: 2012,
-
-        // If you add a file at /assets/profile.jpg it will render automatically.
         photoPath: "assets/profile.jpg",
 
-        // Tagline under headline
         tagline:
-          "I build pragmatic, secure, observable systems that ship and scale — primarily with .NET/C# and Microsoft Azure.",
+          "Primarily focused on .NET/C# and Microsoft Azure — building scalable, cloud-native platforms with strong reliability and operability.",
 
-        // Optional personal line
-        personalLine: "Dad • Endurance runner • Lifelong learner",
+        personalLine: "Dad • Endurance runner",
 
-        // Contact/links (set show:false to hide)
+        // Only keep GitHub + LinkedIn (no email)
         links: [
           { label: "GitHub", href: "https://github.com/svaza", icon: "🐙", show: true },
           { label: "LinkedIn", href: "https://www.linkedin.com/in/REPLACE_ME", icon: "💼", show: true },
-          { label: "Email", href: "mailto:vazasantosh@gmail.com", icon: "✉️", show: true },
-          // Put your resume pdf at /assets/SantoshVaza-Resume.pdf (optional)
-          { label: "Resume", href: "assets/SantoshVaza-Resume.pdf", icon: "📄", show: false },
         ],
 
-        // Quick highlight chips under hero
         highlights: [
           "Cloud & Platform Architecture",
           "Distributed Systems",
           "Microservices & DDD",
           "Event-Driven Architecture",
           "Performance & Reliability",
-          "Engineering Leadership",
         ],
       },
 
-      // Short narrative sections
       about: {
+        title: "About",
         paragraphs: [
-          "I’m a Principal Software Engineer and Solutions Architect with 13+ years of experience architecting and delivering scalable, cloud-native enterprise applications.",
-          "I prefer systems that are boring in production: clear boundaries, predictable failure modes, measurable SLOs, and security controls that don’t become a “later” problem.",
+          "I’m Santosh Vaza — a Principal Software Engineer and Solutions Architect with 13+ years of experience designing and delivering scalable, cloud-native enterprise applications.",
+          "My core expertise is in the Microsoft ecosystem (.NET, C#, ASP.NET Core, and Azure), with a practical focus on system design, performance optimization, security, and production readiness. I’m comfortable working across the stack when needed, including modern front-end frameworks.",
+          "I value clean, maintainable architecture that supports real-world constraints (latency, cost, operational complexity) — and I like systems that are boring in production: clear boundaries, measurable telemetry, and predictable failure modes.",
+          "Outside work, I’m a dad and an endurance runner — I enjoy learning continuously and keeping my engineering decisions grounded in long-term value.",
         ],
       },
 
-      focus: {
-        title: "Currently focusing",
-        bullets: [
-          "Azure architecture patterns, governance, and cost-aware designs",
-          "LLM integration for business apps (RAG, tool-calling, evaluation, guardrails)",
-          "Performance tuning, concurrency, and operational excellence",
-          "Clear communication: diagrams, ADRs, and decision-quality documentation",
-        ],
-      },
+      // Kept: Core strengths + Technical toolkit
+      coreStrengths: [
+        {
+          tone: "ok",
+          icon: "✅",
+          title: "Pragmatic engineering",
+          text: "Patterns must earn their keep. If complexity increases, the payoff should be obvious (maintainability, scalability, reliability, or speed of delivery).",
+        },
+        {
+          tone: "warn",
+          icon: "⚖️",
+          title: "Architecture with trade-offs",
+          text: "I optimize for outcomes under constraints (latency, scale, security, and cost), while keeping boundaries and ownership clear.",
+        },
+        {
+          tone: "ok",
+          icon: "📈",
+          title: "Shipping mindset",
+          text: "Incremental delivery, measurable outcomes, and strong feedback loops via observability and post-incident learning.",
+        },
+      ],
 
-      // Technical skills - edit groups freely
       skillGroups: [
         {
           title: "Core stack",
-          chips: [".NET 8", "ASP.NET Core", "C#", "TypeScript", "EF Core", "Dapper", "xUnit", "Serilog"],
+          chips: [".NET", "ASP.NET Core", "C#", "EF Core", "Dapper", "xUnit", "Serilog"],
         },
         {
           title: "Cloud",
-          chips: ["Microsoft Azure", "App Service", "Functions", "Logic Apps", "Service Bus", "App Insights", "Key Vault", "App Config", "Azure SQL"],
+          chips: ["Microsoft Azure", "App Service", "Functions", "Service Bus", "App Insights", "Key Vault", "App Config", "Azure SQL"],
         },
         {
           title: "Data & Messaging",
@@ -333,7 +316,7 @@
         },
         {
           title: "Architecture",
-          chips: ["REST APIs", "Clean Architecture", "DDD", "Event-Driven", "Microservices", "Design Patterns", "Observability"],
+          chips: ["REST APIs", "Clean Architecture", "DDD", "Event-Driven", "Microservices", "Observability"],
         },
         {
           title: "Front-end (when needed)",
@@ -345,83 +328,14 @@
         },
       ],
 
-      // “How I work” section
-      workingStyle: {
-        principles: [
-          "I write decision records so the “why” doesn’t disappear.",
-          "I prefer explicit boundaries (APIs, contracts, ownership) to reduce coordination overhead.",
-          "I optimize for maintainability and operability, not just “it works today.”",
-          "I treat telemetry (logs, traces, metrics) and runbooks as part of the deliverable.",
-        ],
-      },
-
-      // Experience timeline (NO company names)
-      experience: [
-        {
-          role: "Software Engineering Lead / Principal Engineer",
-          period: "2022 – Present",
-          summary:
-            "Led architecture and delivery for cloud-native platforms; hands-on coding plus leadership, quality, and reliability ownership. (Company name intentionally omitted.)",
-          bullets: [
-            "Designed and built enterprise-grade Azure platforms from inception to launch; led teams of 5+ engineers.",
-            "Delivered multi-region SaaS capabilities by coordinating across distributed teams and time zones.",
-            "Partnered with product and architecture stakeholders on roadmap, technical strategy, and security posture.",
-            "Hands-on development: delivered features end-to-end, performed code reviews, mentored engineers, and improved maintainability.",
-          ],
-        },
-        {
-          role: "Solutions Architect / Technical Lead",
-          period: "2020 – 2022",
-          summary:
-            "Architecture and delivery leadership across web apps, gateways, and microservices for enterprise workloads.",
-          bullets: [
-            "Led a team (~6) across multiple services; ran sprint refinement/planning and code review workflows.",
-            "Drove clean architecture and microservices patterns; improved reliability with structured logging and testing.",
-            "Collaborated with senior stakeholders on system design decisions and integration strategy.",
-          ],
-        },
-        {
-          role: "Principal Engineer / Solution Architect",
-          period: "2015 – 2020",
-          summary:
-            "Designed and implemented distributed systems; contributed across backend and frontend where needed.",
-          bullets: [
-            "Defined application/gateway architecture; supported both client-side and server-side engineering.",
-            "Helped teams deliver efficient solutions through mentoring, reviews, and pragmatic design trade-offs.",
-            "Improved observability and production support posture with better logging/telemetry practices.",
-          ],
-        },
-        {
-          role: "Software Engineer",
-          period: "2012 – 2015",
-          summary:
-            "Foundation years building enterprise features, improving code quality, and shipping customer-driven outcomes.",
-          bullets: [
-            "Designed, developed, and implemented business requirements with strong ownership of quality and correctness.",
-            "Worked on code reviews, bug fixes, and project documentation to improve delivery reliability.",
-          ],
-        },
-      ],
-
-      // Projects section (easy to edit)
-      projects: {
-        title: "Selected projects (add/replace)",
-        items: [
-          { name: "Platform modernization", detail: "Migrated/standardized services with clean boundaries, better performance, and operability." },
-          { name: "Event-driven workflows", detail: "Built asynchronous flows with idempotency, retries, and DLQ practices." },
-          { name: "Security & compliance uplift", detail: "Implemented least-privilege access and hardened secrets/configuration patterns." },
-        ],
-      },
-
       contact: {
         title: "Contact",
-        note:
-          "Best way to reach me: LinkedIn or email. (Replace placeholders if needed.)",
+        note: "Best way to reach me: LinkedIn or GitHub.",
       },
     };
 
     /*****************************************************************
-     * COMPONENTS (mostly data-driven)
+     * COMPONENTS
      *****************************************************************/
     const { useEffect, useMemo, useState } = React;
 
@@ -440,8 +354,9 @@
     }
 
     function LinkPill({ href, icon, label }) {
+      const isHttp = href.startsWith("http");
       return (
-        <a className="link" href={href} target={href.startsWith("http") ? "_blank" : undefined} rel={href.startsWith("http") ? "noreferrer" : undefined}>
+        <a className="link" href={href} target={isHttp ? "_blank" : undefined} rel={isHttp ? "noreferrer" : undefined}>
           <span aria-hidden="true">{icon}</span>
           <span>{label}</span>
         </a>
@@ -484,29 +399,6 @@
       );
     }
 
-    function Timeline({ items }) {
-      return (
-        <ul className="timeline" aria-label="Experience timeline">
-          {items.map((t) => (
-            <li className="titem" key={t.role + t.period}>
-              <div className="row">
-                <div className="role">{t.role}</div>
-                <div className="time">{t.period}</div>
-              </div>
-              <div className="desc">
-                <div>{t.summary}</div>
-                {t.bullets?.length ? (
-                  <ul>
-                    {t.bullets.map((b, idx) => <li key={idx}>{b}</li>)}
-                  </ul>
-                ) : null}
-              </div>
-            </li>
-          ))}
-        </ul>
-      );
-    }
-
     function App() {
       const startYear = CONFIG.profile.careerStartYear;
       const expYears = useMemo(() => yearsOfExperience(startYear), [startYear]);
@@ -522,19 +414,6 @@
       }, [theme]);
 
       const visibleLinks = CONFIG.profile.links.filter(l => l.show);
-
-      const copyIntro = async () => {
-        const intro =
-`${CONFIG.profile.name} — ${CONFIG.profile.headline}
-${expYears}+ years building backend platforms and cloud architectures with .NET/C# and Microsoft Azure.
-Focus: pragmatic systems design, reliability, observability, and shipping outcomes.`;
-        try {
-          await navigator.clipboard.writeText(intro);
-          alert("Copied intro to clipboard.");
-        } catch {
-          alert("Copy failed. You can manually copy from the page.");
-        }
-      };
 
       const onPhotoUpload = (e) => {
         const file = e.target.files && e.target.files[0];
@@ -568,11 +447,6 @@ Focus: pragmatic systems design, reliability, observability, and shipping outcom
                 <span aria-hidden="true">🔗</span>
                 <span>Contact</span>
               </a>
-
-              <Button title="Copy intro snippet" onClick={copyIntro}>
-                <span aria-hidden="true">📋</span>
-                <span>Copy Intro</span>
-              </Button>
             </div>
           </div>
 
@@ -622,8 +496,8 @@ Focus: pragmatic systems design, reliability, observability, and shipping outcom
 
               <div className="kpi" aria-label="Quick facts">
                 <div className="pill"><b>{expYears}+</b> years experience</div>
-                <div className="pill"><b>.NET</b> backend specialist</div>
-                <div className="pill"><b>Azure</b> architecture &amp; ops</div>
+                <div className="pill"><b>.NET</b> / C# primary</div>
+                <div className="pill"><b>Azure</b> focus</div>
                 <div className="pill"><b>Life</b> {CONFIG.profile.personalLine}</div>
               </div>
 
@@ -635,78 +509,29 @@ Focus: pragmatic systems design, reliability, observability, and shipping outcom
             </div>
           </section>
 
-          <div className="grid" aria-label="Summary grid">
-            <SectionCard title="About">
+          <div className="one">
+            <SectionCard title={CONFIG.about.title}>
               {CONFIG.about.paragraphs.map((p, idx) => <p key={idx}>{p}</p>)}
             </SectionCard>
-
-            <SectionCard title={CONFIG.focus.title}>
-              <ul className="list">
-                {CONFIG.focus.bullets.map((b) => <li key={b}>{b}</li>)}
-              </ul>
-            </SectionCard>
           </div>
 
-          <div className="twoCol" aria-label="Skills and experience">
+          <div className="grid" aria-label="Core strengths and toolkit">
             <SectionCard title="Core strengths">
-              <div className="note ok">
-                <div aria-hidden="true">✅</div>
-                <div>
-                  <b>Architecture with trade-offs:</b> I aim for designs that satisfy constraints (latency, scale, security, cost)
-                  without overcomplicating the system.
+              {CONFIG.coreStrengths.map((x) => (
+                <div key={x.title} className={"note " + x.tone} style={{ marginBottom: 10 }}>
+                  <div aria-hidden="true">{x.icon}</div>
+                  <div>
+                    <b>{x.title}:</b> {x.text}
+                  </div>
                 </div>
+              ))}
+              <div style={{ color: "var(--muted2)", fontSize: 12 }}>
+                (Intentionally simplified — no company names, no role timeline.)
               </div>
+            </SectionCard>
 
-              <div style={{ height: 10 }}></div>
-
-              <div className="note warn">
-                <div aria-hidden="true">⚖️</div>
-                <div>
-                  <b>Pragmatic engineering:</b> Patterns must earn their keep. If it increases cognitive load, it needs clear ROI.
-                </div>
-              </div>
-
-              <div style={{ height: 10 }}></div>
-
-              <div className="note">
-                <div aria-hidden="true">📈</div>
-                <div>
-                  <b>Shipping mindset:</b> Incremental delivery, measurable outcomes, and strong feedback loops (telemetry + postmortems).
-                </div>
-              </div>
-
-              <div style={{ height: 14 }}></div>
-
-              <div style={{ color: "var(--muted)", textTransform: "uppercase", fontSize: 14, letterSpacing: ".2px", marginBottom: 10 }}>
-                Technical toolkit
-              </div>
+            <SectionCard title="Technical toolkit">
               <SkillGroups groups={CONFIG.skillGroups} />
-            </SectionCard>
-
-            <SectionCard title="Experience snapshot">
-              <Timeline items={CONFIG.experience} />
-            </SectionCard>
-          </div>
-
-          <div className="grid" aria-label="Work style and projects">
-            <SectionCard title="How I work">
-              <ul className="list">
-                {CONFIG.workingStyle.principles.map((p) => <li key={p}>{p}</li>)}
-              </ul>
-            </SectionCard>
-
-            <SectionCard title={CONFIG.projects.title}>
-              <ul className="list">
-                {CONFIG.projects.items.map((x) => (
-                  <li key={x.name}><b>{x.name}:</b> {x.detail}</li>
-                ))}
-              </ul>
-              <div className="note" style={{ marginTop: 12 }}>
-                <div aria-hidden="true">🧱</div>
-                <div>
-                  <b>Tip:</b> Replace these with 3–5 quantified bullets (latency ↓, cost ↓, incidents ↓, lead time ↓).
-                </div>
-              </div>
             </SectionCard>
           </div>
 
@@ -714,7 +539,12 @@ Focus: pragmatic systems design, reliability, observability, and shipping outcom
             <p style={{ color: "var(--muted)", marginTop: 0 }}>{CONFIG.contact.note}</p>
             <div className="links">
               {visibleLinks.map((l) => (
-                <LinkPill key={"contact-" + l.label} href={l.href} icon={l.icon} label={l.href.replace("mailto:", "")} />
+                <LinkPill
+                  key={"contact-" + l.label}
+                  href={l.href}
+                  icon={l.icon}
+                  label={l.href}
+                />
               ))}
             </div>
           </SectionCard>
