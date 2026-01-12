@@ -197,6 +197,46 @@
 
     .mono{ font-family: var(--mono); }
 
+    /* Hobby projects */
+    .project{
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.02);
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .project + .project{ margin-top: 12px; }
+    .projectHead{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+    }
+    .projectTitle{
+      margin: 0;
+      font-size: 16px;
+      letter-spacing: .2px;
+    }
+    .projectSubtitle{
+      margin: 4px 0 0;
+      color: var(--muted2);
+      font-size: 12px;
+      font-family: var(--mono);
+    }
+    .projectDesc{
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .projectLinks{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    a.btnLink{ text-decoration:none; }
+    a.btnLink:hover{ text-decoration:none; }
+
     .foot{
       margin-top:18px;
       color: var(--muted2);
@@ -258,7 +298,7 @@
           "Performance & Reliability",
         ],
 
-        // Social profiles only (no email). Replace placeholders.
+        // Social profiles only (no email).
         socialProfiles: [
           { key: "github", label: "GitHub", href: "https://github.com/svaza" },
           { key: "linkedin", label: "LinkedIn", href: "https://www.linkedin.com/in/svaza" },
@@ -274,6 +314,41 @@
           "My core expertise is in the Microsoft ecosystem (.NET, C#, ASP.NET Core, and Azure), with a practical focus on system design, performance optimization, security, and production readiness. I’m comfortable working across the stack when needed, including modern front-end frameworks.",
           "I value clean, maintainable architecture that supports real-world constraints (latency, cost, operational complexity) — and I like systems that are boring in production: clear boundaries, measurable telemetry, and predictable failure modes.",
           "Outside work, I’m a dad and an endurance runner — I enjoy learning continuously and keeping my engineering decisions grounded in long-term value.",
+        ],
+      },
+
+      hobbyProjects: {
+        title: "Hobby projects",
+        intro:
+          "Small, real products I build to learn, solve problems I personally care about, and ship end-to-end.",
+        items: [
+          {
+            name: "Recap Insights",
+            subtitle: "Athlete recap dashboard for Strava + Intervals.icu",
+            description:
+              "A privacy-conscious recap app that turns your training history into weekly/monthly/yearly insights (volume, consistency, trends). Designed to run lean with minimal server-side state.",
+            techStack: [
+              "React + Vite",
+              "Azure Static Web Apps",
+              "Azure Functions (C# isolated)",
+              "Strava OAuth (read)",
+              "Intervals.icu OAuth (read)",
+              "LocalStorage caching",
+              "Cloudflare (domain/DNS)",
+            ],
+            links: [
+              { label: "Live", href: "https://www.recapinsights.link" },
+              { label: "Repo", href: "https://github.com/svaza/recap-insights" },
+            ],
+          },
+          // Add more projects like this:
+          // {
+          //   name: "Project Name",
+          //   subtitle: "Short one-liner",
+          //   description: "2–3 lines max",
+          //   techStack: ["Tech 1", "Tech 2"],
+          //   links: [{ label: "Repo", href: "https://..." }],
+          // },
         ],
       },
 
@@ -407,6 +482,44 @@
       );
     }
 
+    function HobbyProjects({ projects }) {
+      return (
+        <>
+          <p style={{ color: "var(--muted)" }}>{projects.intro}</p>
+
+          {projects.items.map((p) => (
+            <div key={p.name} className="project">
+              <div className="projectHead">
+                <div>
+                  <div className="projectTitle">{p.name}</div>
+                  {p.subtitle ? <div className="projectSubtitle">{p.subtitle}</div> : null}
+                </div>
+
+                {p.links?.length ? (
+                  <div className="projectLinks" aria-label={`${p.name} links`}>
+                    {p.links.map((l) => (
+                      <a key={l.href} className="btn btnLink" href={l.href} target="_blank" rel="noreferrer">
+                        <span aria-hidden="true">🔗</span>
+                        <span>{l.label}</span>
+                      </a>
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+
+              {p.description ? <div className="projectDesc">{p.description}</div> : null}
+
+              {p.techStack?.length ? (
+                <div className="chips" style={{ marginTop: 10 }}>
+                  {p.techStack.map((t) => <div key={t} className="chip">{t}</div>)}
+                </div>
+              ) : null}
+            </div>
+          ))}
+        </>
+      );
+    }
+
     function App() {
       const expYears = useMemo(() => yearsOfExperience(CONFIG.profile.careerStartYear), []);
       const [theme, setTheme] = useState(() => localStorage.getItem("theme") || "dark");
@@ -481,6 +594,10 @@
           <div className="one">
             <SectionCard title={CONFIG.about.title}>
               {CONFIG.about.paragraphs.map((p, idx) => <p key={idx}>{p}</p>)}
+            </SectionCard>
+
+            <SectionCard title={CONFIG.hobbyProjects.title}>
+              <HobbyProjects projects={CONFIG.hobbyProjects} />
             </SectionCard>
           </div>
 
