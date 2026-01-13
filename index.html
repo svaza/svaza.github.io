@@ -374,12 +374,12 @@
       ],
 
       skillGroups: [
-        { title: "Core stack", chips: [".NET", "ASP.NET Core", "C#", "EF Core", "Dapper", "xUnit", "Serilog"] },
-        { title: "Cloud", chips: ["Microsoft Azure", "App Service", "Functions", "Service Bus", "App Insights", "Key Vault", "App Config", "Azure SQL"] },
+        { title: "Core stack", chips: [".NET", "ASP.NET Core", "C#", "EF Core", "xUnit", "Serilog"] },
+        { title: "Microsoft Azure", chips: ["App Service", "Functions", "Service Bus", "App Insights", "Key Vault", "App Config", "Azure SQL", "Cosmos DB", "Static Webapps"] },
         { title: "Data & Messaging", chips: ["SQL Server", "PostgreSQL", "Oracle", "Redis", "RabbitMQ", "Kafka", "Elasticsearch"] },
         { title: "Architecture", chips: ["REST APIs", "Clean Architecture", "DDD", "Event-Driven", "Microservices", "Observability"] },
         { title: "Front-end (when needed)", chips: ["React", "Angular", "Bootstrap"] },
-        { title: "AI (practical)", chips: ["Prompt Engineering", "Copilot-assisted workflows"] },
+        { title: "AI (practical)", chips: ["Prompt Engineering", "Github Copilot", "Github Speckit"] },
       ],
     };
 
@@ -595,10 +595,6 @@
             <SectionCard title={CONFIG.about.title}>
               {CONFIG.about.paragraphs.map((p, idx) => <p key={idx}>{p}</p>)}
             </SectionCard>
-
-            <SectionCard title={CONFIG.hobbyProjects.title}>
-              <HobbyProjects projects={CONFIG.hobbyProjects} />
-            </SectionCard>
           </div>
 
           <div className="grid" aria-label="Core strengths and toolkit">
@@ -611,13 +607,16 @@
                   </div>
                 </div>
               ))}
-              <div style={{ color: "var(--muted2)", fontSize: 12 }}>
-                (Intentionally simplified — no company names, no role timeline.)
-              </div>
             </SectionCard>
 
             <SectionCard title="Technical toolkit">
               <SkillGroups groups={CONFIG.skillGroups} />
+            </SectionCard>
+          </div>
+
+          <div className="one">
+            <SectionCard title={CONFIG.hobbyProjects.title}>
+              <HobbyProjects projects={CONFIG.hobbyProjects} />
             </SectionCard>
           </div>
 
