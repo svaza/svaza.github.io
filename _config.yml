@@ -1,1 +1,6 @@
-theme: jekyll-theme-minimal
+title: "Santosh's Tech Notes"
+description: "Systems, Azure, .NET, and architecture notes."
+theme: minima
+markdown: kramdown
+kramdown:
+  syntax_highlighter: rouge
