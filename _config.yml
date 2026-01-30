@@ -1,6 +1,6 @@
 title: "Santosh's Tech Notes"
-description: "Systems, Azure, .NET, and architecture notes."
+description: "Azure, .NET, architecture notes"
 theme: minima
-markdown: kramdown
-kramdown:
-  syntax_highlighter: rouge
+
+# This forces post URLs to be under /posts/
+permalink: /posts/:year/:month/:day/:title/
