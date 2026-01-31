@@ -1,6 +1,39 @@
-title: "Santosh's Tech Notes"
-description: "Azure, .NET, architecture notes"
+title: "svaza · log"
+description: "Azure, .NET, architecture — practical notes."
+email: ""
+url: "https://svaza.github.io"
+baseurl: ""
+
+# Put your blog listing at /posts/ while keeping your existing /index.html profile page.
+# Posts still live in _posts/ (Jekyll convention), but URLs will be /posts/yyyy/mm/dd/title/
+permalink: /posts/:year/:month/:day/:title/
+
+# These are commonly used on GitHub Pages, but Pages only allows a whitelist.
+# If you hit build errors, remove plugins OR build via GitHub Actions.
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Navigation links in Minima
+header_pages:
+  - about.md
+  - projects.md
+
 theme: minima
 
-# This forces post URLs to be under /posts/
-permalink: /posts/:year/:month/:day/:title/
+minima:
+  skin: dark
+  social_links:
+    - { platform: github,  user_url: "https://github.com/svaza" }
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/svaza/" }
+
+# Make excerpts show on the posts list
+show_excerpts: true
+excerpt_separator: "<!--more-->"
+
+# Markdown / code highlighting defaults for GitHub Pages
+markdown: kramdown
+kramdown:
+  input: GFM

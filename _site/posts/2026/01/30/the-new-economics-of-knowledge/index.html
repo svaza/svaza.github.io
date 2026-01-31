@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The New Economics of Knowledge | svaza · log</title>
+<meta name="generator" content="Jekyll v3.10.0" />
+<meta property="og:title" content="The New Economics of Knowledge" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This article breaks down what that means for creators (docs/OSS/blogs), why citations won’t fully fix the incentives, and what the likely endgame looks like (licensed + permissioned retrieval via connectors/RAG)." />
+<meta property="og:description" content="This article breaks down what that means for creators (docs/OSS/blogs), why citations won’t fully fix the incentives, and what the likely endgame looks like (licensed + permissioned retrieval via connectors/RAG)." />
+<link rel="canonical" href="http://localhost:4000/posts/2026/01/30/the-new-economics-of-knowledge/" />
+<meta property="og:url" content="http://localhost:4000/posts/2026/01/30/the-new-economics-of-knowledge/" />
+<meta property="og:site_name" content="svaza · log" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2026-01-30T09:00:00-06:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="The New Economics of Knowledge" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2026-01-30T09:00:00-06:00","datePublished":"2026-01-30T09:00:00-06:00","description":"This article breaks down what that means for creators (docs/OSS/blogs), why citations won’t fully fix the incentives, and what the likely endgame looks like (licensed + permissioned retrieval via connectors/RAG).","headline":"The New Economics of Knowledge","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/posts/2026/01/30/the-new-economics-of-knowledge/"},"url":"http://localhost:4000/posts/2026/01/30/the-new-economics-of-knowledge/"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="svaza · log" /></head>
+<body><header class="site-header" role="banner">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">svaza · log</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/projects/">Projects</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The New Economics of Knowledge</h1>
+    <p class="post-meta">
+      <time class="dt-published" datetime="2026-01-30T09:00:00-06:00" itemprop="datePublished">Jan 30, 2026
+      </time></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <p>This article breaks down what that means for creators (docs/OSS/blogs), why citations won’t fully fix the incentives, and what the likely endgame looks like (licensed + permissioned retrieval via connectors/RAG).</p>
+
+<!--more-->
+
+<p>Over the past few weeks, I’ve been thinking less about how smart LLMs are getting and more about what happens to <strong>knowledge creation</strong> when the internet’s business model shifts.</p>
+
+<p>This post is about the mechanism—not the hype:</p>
+
+<ul>
+  <li><strong>Usage can go up</strong></li>
+  <li><strong>Revenue can collapse</strong></li>
+  <li>because the <strong>distribution funnel</strong> changed.</li>
+</ul>
+
+<hr />
+
+<h2 id="tldr">TL;DR</h2>
+
+<p>The web is moving from a <strong>link economy</strong> (traffic funds creators) to an <strong>answer economy</strong> (answers keep users inside an “answer layer,” and value accrues there). Citations help <em>attribution</em>, but they don’t restore the old <em>economics</em>. The likely future is <strong>permissioned retrieval</strong>: licensing, pay-per-crawl, and user-owned connectors that bring your own access.</p>
+
+<hr />
+
+<h2 id="tailwinds-story-is-the-canary">Tailwind’s story is the canary</h2>
+
+<p>A brutal example: a widely used tool can remain popular while monetization collapses if the discovery path is disrupted.</p>
+
+<p>If your conversion funnel is:</p>
+
+<blockquote>
+  <p>docs → discovery → upgrade</p>
+</blockquote>
+
+<p>…then losing docs traffic is existential.</p>
+
+<p>That’s the part that matters: <strong>the interface layer moved</strong>.</p>
+
+<hr />
+
+<h2 id="the-answer-layer-what-changed">The Answer Layer (what changed)</h2>
+
+<p>I call it the <strong>Answer Layer</strong>: the place where users increasingly <strong>consume the value</strong> without visiting the original source.</p>
+
+<h3 id="old-link-economy">Old: Link economy</h3>
+
+<p>Historically, the value loop looked like this:</p>
+
+<p><strong>Author publishes → user visits site → creator captures value</strong><br />
+Value = ads, sponsors, newsletter signups, product upgrades, donations, reputation, backlinks.</p>
+
+<p>Even when content was “free,” <strong>traffic was the currency</strong>.</p>
+
+<h3 id="new-answer-economy">New: Answer economy</h3>
+
+<p>Now the loop increasingly looks like:</p>
+
+<p><strong>Author publishes → crawler ingests → answer layer summarizes → user stays in AI</strong><br />
+…and subscription/attention revenue accrues primarily to the answer layer.</p>
+
+<p>Here’s the same thing as a simple architecture diagram:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Old (Link Economy):
+Author → Website → Reader → $ to Author
+
+New (Answer Economy):
+Author → Website → Crawler → Answer Layer → Reader → $ to Answer Layer
+</code></pre></div></div>
+
+<p>The reader wins (fast, tailored help).<br />
+The answer layer wins (retention, subscriptions).<br />
+The author often loses (less traffic → weaker monetization).</p>
+
+<hr />
+
+<h2 id="why-just-add-citations-doesnt-fix-it">Why “just add citations” doesn’t fix it</h2>
+
+<p>Two uncomfortable truths:</p>
+
+<p>1) <strong>If intent is satisfied inside the answer layer, the link becomes optional.</strong><br />
+Even good citations don’t change the fact that monetization depends on visits, time on site, conversions, and repeat engagement.</p>
+
+<p>2) <strong>When traffic collapses, rational actors change behavior.</strong><br />
+If you run a docs- or content-funded business, you’ll move toward:</p>
+<ul>
+  <li>paywalls / gating</li>
+  <li>blocking crawlers</li>
+  <li>throttling / monetizing access</li>
+  <li>private communities and closed platforms</li>
+</ul>
+
+<p>That’s not moralizing. That’s incentives.</p>
+
+<hr />
+
+<h2 id="what-happens-next-stagnation-i-think-fragmentation">What happens next: stagnation? I think fragmentation.</h2>
+
+<p>I don’t think LLMs “stagnate.” I think knowledge <strong>fragments</strong>.</p>
+
+<p>Likely trajectory:</p>
+
+<p>1) <strong>Open commons shrinks</strong> (less high-signal writing in public)<br />
+2) <strong>Paid knowledge grows</strong> (newsletters, private repos, gated docs, paid communities)<br />
+3) <strong>Access becomes permissioned</strong> (licensing, pay-per-crawl, authenticated APIs)<br />
+4) <strong>AI becomes less “trained on everything” and more “retrieves what you’re allowed to access.”</strong></p>
+
+<p>From a systems viewpoint, this is like moving from:</p>
+
+<ul>
+  <li>one big public package registry<br />
+to</li>
+  <li>public packages + private registries + commercial vendors</li>
+</ul>
+
+<p>Capabilities keep improving, but <strong>fresh, high-quality perspectives</strong> become less universally available unless the economics are fixed.</p>
+
+<p>There’s also a societal risk: if everything becomes permissioned, large institutions can pay while smaller creators and niche communities become less visible. The commons deteriorates.</p>
+
+<hr />
+
+<h2 id="the-technical-exit-ramp-permissioned-retrieval--user-owned-access">The technical exit ramp: permissioned retrieval + user-owned access</h2>
+
+<p>Base models will remain strong. “Fresh knowledge” becomes a <strong>retrieval</strong> problem.</p>
+
+<p>That suggests a future where:</p>
+
+<ul>
+  <li>users/companies bring their own subscriptions/permissions</li>
+  <li>AI retrieves using authenticated access</li>
+  <li>AI synthesizes using RAG (retrieval-augmented generation)</li>
+  <li>provenance, policy, and auditing become first-class</li>
+</ul>
+
+<p>This is where <strong>connectors and standards</strong> matter. If the future is “bring your own access,” AI needs a consistent way to talk to tools and data sources.</p>
+
+<p>One approach gaining traction is <strong>Model Context Protocol (MCP)</strong>—an open standard for secure, two-way connections between data sources and AI tools. Think of it as a “USB-C port” for AI systems: instead of scraping everything, we attach authorized sources.</p>
+
+<hr />
+
+<h2 id="a-sustainable-knowledge-supply-chain-three-lanes">A sustainable “knowledge supply chain” (three lanes)</h2>
+
+<p>From an architecture lens, I see three viable lanes:</p>
+
+<h3 id="1-licensing-provider-pays-publisher">1) Licensing (provider pays publisher)</h3>
+<p>AI providers pay publishers/creators for access at scale.<br />
+Works best for big publishers. Less clear for the long tail.</p>
+
+<h3 id="2-pay-per-crawl-host-sets-terms">2) Pay-per-crawl (host sets terms)</h3>
+<p>The content host sets pricing/terms for AI crawler access.<br />
+This is the “API-ification” of the open web.</p>
+
+<h3 id="3-user-owned-connectors-bring-your-own-subscription">3) User-owned connectors (bring your own subscription)</h3>
+<p>You pay for a newsletter, docs, research platform, etc.<br />
+You connect it to your AI.<br />
+The AI retrieves using your credentials and summarizes.</p>
+
+<p>This lane feels the most fair—but it needs:</p>
+<ul>
+  <li>strong standards (interoperability)</li>
+  <li>tight access control</li>
+  <li>logging/auditing</li>
+  <li>cache rules + provenance</li>
+  <li>a clear story on what is stored vs used transiently</li>
+</ul>
+
+<hr />
+
+<h2 id="practical-implications-if-you-build-software">Practical implications (if you build software)</h2>
+
+<p>If your product depends on docs, content, or open source goodwill, assume:</p>
+
+<ul>
+  <li><strong>SEO alone is no longer a stable funnel</strong></li>
+  <li><strong>attribution is not monetization</strong></li>
+  <li><strong>distribution is moving up the stack</strong> (into AI interfaces)</li>
+</ul>
+
+<p>Concrete moves that “survive the shift”:</p>
+
+<p>1) <strong>Own a direct channel</strong> (email list, community, product telemetry + onboarding)<br />
+2) <strong>Treat docs like a product</strong> (activation paths, upgrade prompts, “next step” flows)<br />
+3) <strong>Publish canonical machine-readable artifacts</strong> (APIs/specs/examples) and decide what’s public vs gated<br />
+4) <strong>Plan for permissioned retrieval</strong> (auth, rate limits, audit logs, licensing terms)<br />
+5) <strong>Measure the new funnel</strong>: where do users learn now—search, chat, IDE copilots, agents?</p>
+
+<hr />
+
+<h2 id="closing">Closing</h2>
+
+<p>The web isn’t dying. The interface is changing.</p>
+
+<p>The biggest question isn’t “Will AI cite creators?”<br />
+It’s: <strong>Who gets paid when the user never leaves the answer layer?</strong></p>
+
+<p>If we want a healthy knowledge ecosystem, we need new primitives—technical and economic—that make knowledge creation sustainable again.</p>
+
+<hr />
+
+<h2 id="references-worth-reading">References (worth reading)</h2>
+
+<ul>
+  <li>Tailwind and the doc-traffic → revenue collapse story:
+    <ul>
+      <li><a href="https://www.businessinsider.com/tailwind-engineer-layoffs-ai-github-2026-1">Business Insider coverage</a></li>
+      <li><a href="https://devclass.com/2026/01/08/tailwind-labs-lays-off-75-percent-of-its-engineers-thanks-to-brutal-impact-of-ai/">DevClass write-up</a></li>
+    </ul>
+  </li>
+  <li>Click-through impact when AI summaries appear:
+    <ul>
+      <li><a href="https://www.pewresearch.org/short-reads/2025/07/22/google-users-are-less-likely-to-click-on-links-when-an-ai-summary-appears-in-the-results/">Pew Research Center: users click less when AI summaries appear</a></li>
+    </ul>
+  </li>
+  <li>Pay-per-crawl / monetizing crawler access:
+    <ul>
+      <li><a href="https://blog.cloudflare.com/introducing-pay-per-crawl/">Cloudflare: Introducing Pay per Crawl</a></li>
+    </ul>
+  </li>
+  <li>Publisher opt-out mechanisms (regulatory attention):
+    <ul>
+      <li><a href="https://apnews.com/article/f2bf8545f3b987aa1900a829c0d01390">AP: UK proposals around opting out of AI summaries</a></li>
+    </ul>
+  </li>
+  <li>Permissioned retrieval + connectors:
+    <ul>
+      <li><a href="https://modelcontextprotocol.io/">Model Context Protocol (overview)</a></li>
+      <li><a href="https://www.anthropic.com/news/model-context-protocol">Anthropic: Introducing MCP</a></li>
+    </ul>
+  </li>
+</ul>
+
+  </div><a class="u-url" href="/posts/2026/01/30/the-new-economics-of-knowledge/" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <h2 class="footer-heading">svaza · log</h2>
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-1">
+        <ul class="contact-list">
+          <li class="p-name">svaza · log</li><li><a class="u-email" href="mailto:"></a></li></ul>
+      </div>
+
+      <div class="footer-col footer-col-2"><ul class="social-media-list"></ul>
+</div>
+
+      <div class="footer-col footer-col-3">
+        <p>Azure, .NET, architecture — practical notes.</p>
+      </div>
+    </div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

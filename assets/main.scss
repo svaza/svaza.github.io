@@ -1,0 +1,191 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+/* =========================
+   VS Code Dark Modern-ish (Charcoal)
+   ========================= */
+
+/* default (light) can stay minimal */
+:root {
+  --accent: #3794ff;      /* VS Code blue */
+  --bg: #ffffff;
+  --surface: #f6f7f9;
+  --fg: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+
+  --code-bg: #0b1220;
+  --code-fg: #e5e7eb;
+}
+
+/* charcoal dark — NOT black */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1e1e1e;        /* main VS Code editor bg */
+    --surface: #252526;   /* panels */
+    --surface2: #2d2d30;  /* slightly raised */
+    --fg: #d4d4d4;        /* editor text */
+    --muted: #9da5b4;     /* subdued text */
+    --border: #333333;    /* subtle borders */
+
+    --code-bg: #1e1e1e;   /* match editor */
+    --code-fg: #d4d4d4;
+  }
+
+  /* Helps form controls render correctly in dark */
+  html { color-scheme: dark; }
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* readable width */
+.wrapper { max-width: 76ch; }
+
+/* header/footer as panels, not black bars */
+.site-header, .site-footer {
+  background: var(--surface);
+  border-color: var(--border);
+}
+
+/* content container: subtle “panel” effect */
+.page-content .wrapper {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.25rem 1.35rem;
+}
+
+/* Links */
+a, a:visited { color: var(--accent); }
+a:hover { text-decoration: underline; }
+
+/* Headings: crisp + slightly tighter */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+
+h2 {
+  margin-top: 2.2rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Post meta */
+.post-meta { color: var(--muted); }
+
+/* Inline code */
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: rgba(255,255,255,0.06);
+  padding: 0.12rem 0.35rem;
+  border-radius: 6px;
+  color: var(--fg);
+}
+
+/* Code blocks */
+pre {
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  overflow: auto;
+}
+
+pre code {
+  background: transparent;
+  padding: 0;
+}
+
+/* Blockquotes as “info callouts” */
+blockquote {
+  border-left: 4px solid var(--accent);
+  background: rgba(55, 148, 255, 0.08);
+  color: var(--fg);
+  border-radius: 10px;
+  padding: 0.75rem 1rem;
+}
+
+/* Tables look like VS Code panels */
+table {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+th, td {
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: var(--surface2);
+}
+
+/* Header layout + color */
+.site-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+/* Make header content align nicely */
+.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+/* Title: less “default blog”, more “product header” */
+.site-title,
+.site-title:visited {
+  color: var(--fg);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  opacity: 0.95;
+}
+
+.site-title:hover {
+  opacity: 1;
+  text-decoration: none;
+}
+
+/* Nav links: VSCode-ish subtle pills */
+.site-nav .page-link {
+  color: var(--muted);
+  background: transparent;
+  padding: 6px 10px;
+  border-radius: 10px;
+  text-decoration: none;
+  border: 1px solid transparent;
+}
+
+.site-nav .page-link:hover {
+  color: var(--fg);
+  background: rgba(255,255,255,0.06);
+  border-color: var(--border);
+}
+
+/* Optional: highlight current page link if Minima adds 'active' */
+.site-nav .page-link.active {
+  color: var(--fg);
+  background: rgba(55, 148, 255, 0.12);
+  border-color: rgba(55, 148, 255, 0.35);
+}
+
+.site-footer {
+  display: none !important;
+}
+
+.page-content {
+  padding-bottom: 3rem;
+}
