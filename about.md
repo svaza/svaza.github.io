@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 ## Santosh Vaza
-**Principal Software Engineer • Solutions Architect**
+**Technical Lead / Principal Engineer / Solutions Architect**
 
 Primarily focused on **.NET/C# and Microsoft Azure** — building scalable, cloud-native platforms with strong reliability and operability.
 

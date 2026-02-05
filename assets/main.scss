@@ -63,8 +63,33 @@ body {
 }
 
 /* Links */
-a, a:visited { color: var(--accent); }
-a:hover { text-decoration: underline; }
+a,
+a:visited {
+  color: var(--accent);
+  text-decoration: none;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+  transition: color 120ms ease, text-decoration-color 120ms ease;
+}
+
+a:hover,
+a:focus-visible {
+  color: #7ab8ff;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+}
+
+a:active {
+  color: #4aa3ff;
+}
+
+/* Avoid links inside code blocks inheriting link color */
+pre a,
+.highlight a,
+.highlighter-rouge .highlight a {
+  color: inherit;
+  text-decoration: none;
+}
 
 /* Headings: crisp + slightly tighter */
 h1, h2, h3 {
@@ -82,7 +107,7 @@ h2 {
 .post-meta { color: var(--muted); }
 
 /* Inline code */
-code {
+:not(pre) > code {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   background: rgba(255,255,255,0.06);
   padding: 0.12rem 0.35rem;
@@ -90,19 +115,38 @@ code {
   color: var(--fg);
 }
 
-/* Code blocks */
-pre {
+/* Code blocks (Jekyll/Minima uses .highlight wrappers) */
+pre,
+.highlight,
+.highlighter-rouge .highlight,
+figure.highlight,
+div.highlight {
   background: var(--code-bg);
   color: var(--code-fg);
   border: 1px solid var(--border);
   border-radius: 12px;
+}
+
+pre {
   padding: 1rem 1.1rem;
   overflow: auto;
 }
 
-pre code {
+.highlight pre,
+figure.highlight pre,
+div.highlight pre {
+  background: transparent;
+  border: 0;
+  margin: 0;
+  padding: 1rem 1.1rem;
+}
+
+pre code,
+.highlight code,
+.highlighter-rouge .highlight code {
   background: transparent;
   padding: 0;
+  color: var(--code-fg);
 }
 
 /* Blockquotes as “info callouts” */
